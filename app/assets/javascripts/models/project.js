@@ -34,16 +34,16 @@
  * }
  *
  */
+//= require ./pivotal_record
 
-Probe.Project = DS.Model.extend({
-  name: DS.attr('string'),
+Probe.Project = Probe.PivotalBase.extend({
   kind: DS.attr('string'),
   version: DS.attr('number'),
   pointScale: DS.attr('string'),
-  customPointScale: DS.attr('boolean'),
+  pointScaleIsCustom: DS.attr('boolean'),
 
   iterationLength: DS.attr('number'),
-  currentIteration: DS.attr('number'),
-  iterationsComplete: DS.attr('number'),
+  currentIterationNumber: DS.attr('number'),
+  currentIterationsComplete: DS.attr('number'),
   initialVelocity: DS.attr('number')
 });

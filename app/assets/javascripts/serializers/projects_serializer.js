@@ -1,20 +1,18 @@
+//= require ./serializer_helper
+
 Probe.ProjectSerializer = DS.RESTSerializer.extend({
   extract: function(store, type, payload, id, requestType) {
     var newPayload = {};
-    if (requestType === 'findAll') {
+    if (requestType === "findAll") {
     } else {
-      newPayload.project = {
-        id: payload.id,
-        name: payload.name,
-        kind: payload.kind,
-        version: payload.version,
-        pointScale: payload.point_scale,
-        customPointScale: payload.point_scale_is_custom,
-        iterationLength: payload.iteration_length,
-        currentIteration: payload.current_iteration_number,
-        iterationsComplete: payload.number_of_done_iterations_to_show,
-        initialVelocity: payload.initial_velocity
-      }
+      newPayload.project =
+        Probe.SerializerHelper.permit(payload, [
+          "id", "name", "kind", "version", "point_scale",
+          "point_scale_is_custom", "iteration_length",
+          "current_iteration_number",
+          "number_of_done_iterations_to_show",
+          "initial_velocity"
+        ]);
     }
     return this._super(store, type, newPayload, id, requestType);
   }
