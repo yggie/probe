@@ -6,7 +6,7 @@
 development: &dev
   adapter: postgresql
   encoding: unicode
-  database: pivotal_analyzer_development
+  database: probe_development
   pool: 5
   username: postgres
   password:
@@ -16,8 +16,8 @@ development: &dev
 # Do not set this db to the same as development or production.
 test:
   <<: *dev
-  database: pivotal_analyzer_test
+  database: probe_test
 
 production:
   <<: *dev
-  database: pivotal_analyzer_production
+  database: probe_production
