@@ -1,21 +1,14 @@
 Probe.ProjectRoute = Ember.Route.extend({
-  projectId: null,
-
-  model: function(params) {
-    var route = this;
-    return this.store.find('project', params.project_id)
-      .then(function(json) {
-        route.set('projectId', params.project_id);
-        return json;
-      }, function(reason) {
-        return reason;
-      });
+  setupController: function(controller, project) {
+    if (project) {
+      this._super(controller, project)
+      controller.set("projectId", project.get("id"));
+    } else {
+      controller.transitionToRoute("index");
+    }
   },
 
-  actions: {
-    search: function() {
-      console.log(arguments);
-      this.transitionTo('project', projectId);
-    }
+  model: function(params) {
+    return this.store.find("project", params.project_id);
   }
 });

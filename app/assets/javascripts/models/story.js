@@ -33,6 +33,7 @@
 //= require ./pivotal_record
 
 Probe.Story = Probe.PivotalBase.extend({
+  project: DS.belongsTo("project", { async: true }),
   projectId: DS.attr("number"),
   storyType: DS.attr("string"),
   currentState: DS.attr("string"),

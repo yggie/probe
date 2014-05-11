@@ -3,6 +3,7 @@
 Probe.StorySerializer = DS.RESTSerializer.extend({
   extract: function(store, type, payload, id, requestType) {
     var newPayload = {};
+    console.log("Searching for stories");
     if (requestType === "findAll") {
       newPayload.stories = [];
       for (var i = 0; i < payload.length; i++) {

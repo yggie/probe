@@ -26,14 +26,6 @@ Probe = Ember.Application.create({
   LOG_TRANSITIONS_INTERNAL: true
 });
 
-Probe.ApplicationController = Ember.Controller.extend({
-  actions: {
-    search: function() {
-      console.log("Hello, searching now for project with ID = " + this.get("project_id"));
-    }
-  }
-});
-
 // Ember.TextSupport.reopen({
 //   attributeBindings: ['somethin']
 // });

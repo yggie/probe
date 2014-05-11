@@ -37,13 +37,14 @@
 //= require ./pivotal_record
 
 Probe.Project = Probe.PivotalBase.extend({
-  kind: DS.attr('string'),
-  version: DS.attr('number'),
-  pointScale: DS.attr('string'),
-  pointScaleIsCustom: DS.attr('boolean'),
+  version: DS.attr("number"),
+  pointScale: DS.attr("string"),
+  pointScaleIsCustom: DS.attr("boolean"),
 
-  iterationLength: DS.attr('number'),
-  currentIterationNumber: DS.attr('number'),
-  currentIterationsComplete: DS.attr('number'),
-  initialVelocity: DS.attr('number')
+  iterationLength: DS.attr("number"),
+  currentIterationNumber: DS.attr("number"),
+  currentIterationsComplete: DS.attr("number"),
+  initialVelocity: DS.attr("number"),
+
+  stories: DS.hasMany("story", { async: true })
 });
