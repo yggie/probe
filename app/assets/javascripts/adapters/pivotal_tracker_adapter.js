@@ -10,5 +10,10 @@ Probe.PivotalTrackerAdapter = DS.ActiveModelAdapter.extend({
   findMany: function(store, type, ids) {
     console.log("Adapter: " + type + ".findMany()");
     return this._super(store, type, ids);
+  },
+
+  findQuery: function(store, type, params, array) {
+    console.log("Adapter: " + type + ".findQuery()");
+    return this._super(store, type, params, array);
   }
 });

@@ -3,7 +3,7 @@ Probe.ApplicationController = Ember.Controller.extend({
   projectIdBinding: "controllers.project.projectId",
 
   actions: {
-    search: function() {
+    searchProject: function() {
       this.transitionToRoute("project", this.get("projectId"));
     }
   }

@@ -1,0 +1,25 @@
+<h2>Stories for {{project.name}}</h2>
+<section class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Created at</th>
+        <th>Updated at</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each story in model}}
+      <tr>
+        <td>{{story.id}}</td>
+        <td>{{story.name}}</td>
+        <td>{{story.storyType}}</td>
+        <td>{{story.updatedAt}}</td>
+        <td>{{story.createdAt}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</section>

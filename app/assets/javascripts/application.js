@@ -27,11 +27,10 @@ Probe = Ember.Application.create({
 });
 
 // Ember.TextSupport.reopen({
-//   attributeBindings: ['somethin']
+//   attributeBindings: ["somethin"]
 // });
-
-Probe.IndexView = Ember.View.extend({
-  templateName: 'layouts/welcome'
-});
+// Probe.IndexView = Ember.View.extend({
+//   templateName: "layouts/welcome"
+// });
 
 //= require_tree .

@@ -1,3 +1,3 @@
 Probe.ProjectSearchView = Ember.View.extend({
-  templateName: 'projects/search'
+  templateName: "project_search"
 });
