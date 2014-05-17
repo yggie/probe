@@ -1,3 +1,5 @@
 Probe.ProjectController = Ember.ObjectController.extend({
-  projectId: null
+  needs: "application",
+  projectIdBinding: "controllers.application.projectId",
+  project: Ember.computed.alias("model")
 });

@@ -36,7 +36,7 @@
  */
 //= require ./pivotal_record
 
-Probe.Project = Probe.PivotalBase.extend({
+Probe.Project = Probe.PivotalRecord.extend({
   version: DS.attr("number"),
   pointScale: DS.attr("string"),
   pointScaleIsCustom: DS.attr("boolean"),
@@ -46,5 +46,7 @@ Probe.Project = Probe.PivotalBase.extend({
   currentIterationsComplete: DS.attr("number"),
   initialVelocity: DS.attr("number"),
 
-  stories: DS.hasMany("story", { async: true })
+  stories: Ember.computed(function() {
+    return this.store.find("story", { projectId: this.get("id") });
+  })
 });

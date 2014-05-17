@@ -5,6 +5,7 @@
  *   "kind": "story",
  *   "name": "AV: LocalSupport",
  *   "project_id": 101010,
+ *   "estimate": 3,
  *   "id": 742821,
  *   "story_type": "chore",
  *   "description": "this is my description",
@@ -33,12 +34,16 @@
  */
 //= require ./pivotal_record
 
-Probe.Story = Probe.PivotalBase.extend({
-  project: DS.belongsTo("project", { async: true }),
+Probe.Story = Probe.PivotalRecord.extend({
   projectId: DS.attr("number"),
   storyType: DS.attr("string"),
   description: DS.attr("string"),
-  acceptedAt: DS.attr("string"),
+  acceptedAt: DS.attr("date"),
   // currentState: DS.attr("string"),
-  url: DS.attr("string")
+  url: DS.attr("string"),
+
+  labels: DS.hasMany("label", { async: false }),
+  project: Ember.computed("projectId", function() {
+    return this.store.find("project", this.get("projectId"));
+  })
 });
