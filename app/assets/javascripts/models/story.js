@@ -26,6 +26,7 @@
  *   ],
  *   "created_at": "2013-01-30T16:49:38Z",
  *   "updated_at": "2014-02-06T15:43:23Z",
+ *   "accepted_at": "2014-02-06T15:43:23Z",
  *   "url": "http://www.pivotaltracker.com/story/show/101010"
  * }
  *
@@ -36,7 +37,8 @@ Probe.Story = Probe.PivotalBase.extend({
   project: DS.belongsTo("project", { async: true }),
   projectId: DS.attr("number"),
   storyType: DS.attr("string"),
-  // currentState: DS.attr("string"),
   description: DS.attr("string"),
+  acceptedAt: DS.attr("string"),
+  // currentState: DS.attr("string"),
   url: DS.attr("string")
 });

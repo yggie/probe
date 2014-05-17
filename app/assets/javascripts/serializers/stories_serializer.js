@@ -9,15 +9,15 @@ Probe.StorySerializer = DS.RESTSerializer.extend({
     if (requestType === "find") {
       newPayload.story =
         Probe.SerializerHelper.permit(payload, [
-          "id", "name", "kind", "project_id", "story_type",
-          "current_state", "description", "url"
+          "id", "name", "kind", "project_id", "story_type", "updated_at",
+          "current_state", "description", "url", "accepted_at", "created_at"
         ]);
     } else {
       var stories = [];
       for (var i = 0; i < payload.length; i++) {
         stories[stories.length] = Probe.SerializerHelper.permit(payload[i], [
-          "id", "name", "kind", "project_id", "story_type",
-          "current_state", "description", "url"
+          "id", "name", "kind", "project_id", "story_type", "updated_at",
+          "current_state", "description", "url", "accepted_at", "created_at"
         ]);
       }
       newPayload.stories = stories;

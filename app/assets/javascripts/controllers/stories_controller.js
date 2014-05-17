@@ -4,6 +4,8 @@ Probe.StoriesController = Ember.ArrayController.extend({
   projectIdBinding: "controllers.project.projectId",
 
   project: function() {
-    return this.get("projectController").get("model");
-  }.property("projectController")
+    var promise = this.get("projectController").get("model");
+  }.property("projectController"),
+
+  init: function() { console.log("Initializing controller"); }
 });

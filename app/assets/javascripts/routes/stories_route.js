@@ -1,10 +1,9 @@
 Probe.StoriesRoute = Ember.Route.extend({
   setupController: function(controller, stories) {
-    if (stories) {
-      this._super(controller, stories);
-    } else {
+    this._super(controller, stories);
+    if (!stories) {
       // do something bad here
-      this._super(controller, stories);
+      console.log("Something bad happened (no stories found)");
     }
   },
 
