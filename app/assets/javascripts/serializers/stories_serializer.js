@@ -3,14 +3,14 @@
 Probe.StorySerializer = DS.RESTSerializer.extend({
   extract: function(store, type, payload, id, requestType) {
     var newPayload = {};
-    console.log("Searching for stories");
-    console.log(requestType);
+    console.log("Serializer: " + type + "." + requestType + "()");
 
     if (requestType === "find") {
       newPayload.story =
         Probe.SerializerHelper.permit(payload, [
           "id", "name", "kind", "project_id", "story_type", "updated_at",
-          "current_state", "description", "url", "accepted_at", "created_at"
+          "current_state", "description", "url", "accepted_at", "created_at",
+          "estimate"
         ]);
     } else {
       var stories = [];
@@ -19,6 +19,9 @@ Probe.StorySerializer = DS.RESTSerializer.extend({
           "id", "name", "kind", "project_id", "story_type", "updated_at",
           "current_state", "description", "url", "accepted_at", "created_at"
         ]);
+        // if (stories[stories.length - 1].labels.length == 0) {
+        //   delete stories[stories.length - 1].labels;
+        // }
       }
       newPayload.stories = stories;
     }

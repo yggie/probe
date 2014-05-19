@@ -4,6 +4,7 @@ Probe.ProjectSerializer = DS.RESTSerializer.extend({
   extract: function(store, type, payload, id, requestType) {
     var newPayload = {};
     console.log("Serializer: " + type + "." + requestType + "()");
+
     if (requestType === "findAll") {
     } else {
       newPayload.project =

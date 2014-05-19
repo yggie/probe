@@ -34,5 +34,3 @@ Probe = Ember.Application.create({
 // });
 
 //= require_tree .
-
-window.store = Probe.__container__.lookup("store:main");

@@ -39,9 +39,11 @@ Probe.Story = Probe.PivotalRecord.extend({
   storyType: DS.attr("string"),
   description: DS.attr("string"),
   acceptedAt: DS.attr("date"),
+  estimate: DS.attr("number", { defaultValue: function() { return 0; }}),
   // currentState: DS.attr("string"),
   url: DS.attr("string"),
 
+  // owners: DS.hasMany("owner", { async: false }),
   labels: DS.hasMany("label", { async: false }),
   project: Ember.computed("projectId", function() {
     return this.store.find("project", this.get("projectId"));

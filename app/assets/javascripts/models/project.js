@@ -45,8 +45,18 @@ Probe.Project = Probe.PivotalRecord.extend({
   currentIterationNumber: DS.attr("number"),
   currentIterationsComplete: DS.attr("number"),
   initialVelocity: DS.attr("number"),
+  weekStartOfDay: DS.attr("string"),
 
   stories: Ember.computed(function() {
     return this.store.find("story", { projectId: this.get("id") });
+  }),
+
+  features: Ember.computed("stories.@each", function() {
+    return this.get("stories").filterBy("storyType", "feature");
+  }),
+
+  data: Ember.computed("stories.@each", function() {
+    window.data = Probe.ProjectData.create({ project: this });
+    return window.data;
   })
 });
