@@ -55,7 +55,18 @@ Probe.Project = Probe.PivotalRecord.extend({
     return this.get("stories").filterBy("storyType", "feature");
   }),
 
-  data: Ember.computed("stories.@each", function() {
+  estimated: Ember.computed("features.@each", function() {
+    var estimated = [];
+    this.get("features").forEach(function(feature, i, features) {
+      var estimate = feature.get("estimate");
+      if (estimate != null) {
+        estimated.push(feature);
+      }
+    });
+    return estimated;
+  }),
+
+  data: Ember.computed(function() {
     window.data = Probe.ProjectData.create({ project: this });
     return window.data;
   })

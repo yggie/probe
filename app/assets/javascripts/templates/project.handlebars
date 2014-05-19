@@ -2,9 +2,9 @@
 <small>{{project.id}}</small>
 <small>{{project.data.totalStoryPoints}}</small>
 
+<h2>Stories for {{project.name}}</h2>
+<svg width="320" height="240" class="burndown"></svg>
 {{#if project.stories}}
-  <h2>Stories for {{project.name}}</h2>
-  <svg width="320" height="240" class="burndown"></svg>
   <section class="table-responsive">
     <table class="table">
       <thead>
@@ -12,6 +12,7 @@
           <th>ID</th>
           <th>Name</th>
           <th>Type</th>
+          <th>Estimate</th>
           <th>Accepted at</th>
           <th>Created at</th>
           <th>Updated at</th>
@@ -23,6 +24,7 @@
           <td>{{story.id}}</td>
           <td>{{story.name}}</td>
           <td>{{story.storyType}}</td>
+          <td>{{story.estimate}}</td>
           <td>{{story.acceptedAt}}</td>
           <td>{{story.updatedAt}}</td>
           <td>{{story.createdAt}}</td>
@@ -31,4 +33,6 @@
       </tbody>
     </table>
   </section>
+{{else}}
+  <p>No stories were found</p>
 {{/if}}

@@ -4,7 +4,7 @@ Probe.StoryAdapter = Probe.PivotalTrackerAdapter.extend({
   findQuery: function(store, type, params, array) {
     console.log(params);
     var url = [ this.get("host"), this.get("namespace"), "projects",
-      params.projectId, "stories?limit=1" ].join("/");
+      params.projectId, "stories?limit=2000" ].join("/");
     return Ember.$.getJSON(url).then(function(json) {
       console.log("Got something!");
       return json;

@@ -17,7 +17,8 @@ Probe.StorySerializer = DS.RESTSerializer.extend({
       for (var i = 0; i < payload.length; i++) {
         stories[stories.length] = Probe.SerializerHelper.permit(payload[i], [
           "id", "name", "kind", "project_id", "story_type", "updated_at",
-          "current_state", "description", "url", "accepted_at", "created_at"
+          "current_state", "description", "url", "accepted_at", "created_at",
+          "estimate"
         ]);
         // if (stories[stories.length - 1].labels.length == 0) {
         //   delete stories[stories.length - 1].labels;
@@ -26,7 +27,7 @@ Probe.StorySerializer = DS.RESTSerializer.extend({
       newPayload.stories = stories;
     }
 
-    console.log(newPayload);
+    // console.log(newPayload);
     return this._super(store, type, newPayload, id, requestType);
   }
 });
