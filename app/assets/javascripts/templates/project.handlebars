@@ -3,7 +3,7 @@
 <small>{{project.data.totalStoryPoints}}</small>
 
 <h2>Stories for {{project.name}}</h2>
-<svg width="320" height="240" class="burndown"></svg>
+<svg width="320" height="240" class="burndown" {{bind-attr display=view.chartDisplay}}></svg>
 {{#if project.stories}}
   <section class="table-responsive">
     <table class="table">
