@@ -26,6 +26,12 @@ Probe = Ember.Application.create({
   LOG_TRANSITIONS_INTERNAL: true
 });
 
+Ember.Object.reopen({
+  throwException: function(msg) {
+    throw this.toString() + " " + msg;
+  }
+});
+
 // Ember.TextSupport.reopen({
 //   attributeBindings: ["somethin"]
 // });

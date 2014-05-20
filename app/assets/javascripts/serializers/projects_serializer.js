@@ -16,7 +16,7 @@ Probe.ProjectSerializer = DS.RESTSerializer.extend({
           "initial_velocity"
         ]);
     }
-    console.log(newPayload);
+    // console.log(newPayload);
     return this._super(store, type, newPayload, id, requestType);
   }
 });

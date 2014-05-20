@@ -5,7 +5,7 @@ Probe.ProjectData = Ember.Object.extend({
     }, 0);
   }),
 
-  iterationDays: Ember.computed("project.features.@each", function() {
+  rawIterationDays: Ember.computed("project.features.@each", function() {
     var rawNormalizedDays = this.get("project.features").map(function(feature) {
       var date = feature.get("acceptedAt");
       if (!date) return null;
@@ -36,9 +36,9 @@ Probe.ProjectData = Ember.Object.extend({
     });
   }),
 
-  sortedIterationDays: Ember.computed("iterationDays.@each", function() {
-    var days = this.get("iterationDays");
-    var uniqueDays = [];
+  iterationDays: Ember.computed("rawIterationDays.@each", function() {
+    var days = this.get("rawIterationDays");
+    var uniqueDays = [ 0 ];
     days.forEach(function(day, i, days) {
       if (day != null && uniqueDays.indexOf(day) === -1) {
         uniqueDays.push(day);
@@ -52,16 +52,17 @@ Probe.ProjectData = Ember.Object.extend({
     return uniqueDays;
   }),
 
-  cumulativeStoryPoints: Ember.computed("iterationDays.@each", "sortedIterationDays", function() {
-    var iterationDays = this.get("iterationDays");
-    var sorted = this.get("sortedIterationDays");
+  cumulativeStoryPoints: Ember.computed("iterationDays", "totalStoryPoints", function() {
+    var rawDays = this.get("rawIterationDays");
+    var days = this.get("iterationDays");
     var points = [];
     this.get("project.features").forEach(function(feature, i, features) {
-      if (iterationDays[i] != null) {
-        var point = points[sorted.indexOf(iterationDays[i])];
-        points[sorted.indexOf(iterationDays[i])] = (point + feature.get("estimate")) || feature.get("estimate");
+      if (rawDays[i] != null) {
+        var point = points[days.indexOf(rawDays[i])];
+        points[days.indexOf(rawDays[i])] = (point + feature.get("estimate")) || feature.get("estimate");
       }
     });
+    points[days.indexOf(0)] = 0;
     points.forEach(function(point, i, points) {
       if (i > 0) {
         points[i] = points[i - 1] + point;
@@ -79,6 +80,6 @@ Probe.ProjectData = Ember.Object.extend({
 
   init: function() {
     this.get("burndown")
-    this.get("sortedIterationDays")
+    this.get("iterationDays")
   }
 });
