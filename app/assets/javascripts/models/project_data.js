@@ -38,6 +38,8 @@ Probe.ProjectData = Ember.Object.extend({
 
   iterationDays: Ember.computed("rawIterationDays.@each", function() {
     var days = this.get("rawIterationDays");
+    if (days.length === 0) return [];
+
     var uniqueDays = [ 0 ];
     days.forEach(function(day, i, days) {
       if (day != null && uniqueDays.indexOf(day) === -1) {
@@ -52,8 +54,10 @@ Probe.ProjectData = Ember.Object.extend({
     return uniqueDays;
   }),
 
-  cumulativeStoryPoints: Ember.computed("iterationDays", "totalStoryPoints", function() {
+  cumulativeStoryPoints: Ember.computed("iterationDays.@each", "totalStoryPoints", function() {
     var rawDays = this.get("rawIterationDays");
+    if (rawDays.length === 0) return [];
+
     var days = this.get("iterationDays");
     var points = [];
     this.get("project.features").forEach(function(feature, i, features) {
@@ -76,10 +80,5 @@ Probe.ProjectData = Ember.Object.extend({
     return this.get("cumulativeStoryPoints").map(function(point) {
       return total - point;
     });
-  }),
-
-  init: function() {
-    this.get("burndown")
-    this.get("iterationDays")
-  }
+  })
 });
