@@ -10,15 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
+//= require jquery-2.1.1
 //= require turbolinks
-//= require d3
-//= require handlebars
-//= require ember.dist
-//= require ember-data.dist
+//= require d3-3.4.6
+//= require handlebars-1.3.0
+//= require ember-1.5.1
+//= require ember-data-1.0.0-beta.6
 //= require_self
 //= require probe
+//= require_tree .
 
 // for more details see: http://emberjs.com/guides/application/
 Probe = Ember.Application.create({
@@ -38,5 +38,3 @@ Ember.Object.reopen({
 // Probe.IndexView = Ember.View.extend({
 //   templateName: "layouts/welcome"
 // });
-
-//= require_tree .
