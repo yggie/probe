@@ -35,6 +35,7 @@
 //= require ./pivotal_record
 
 Probe.Story = Probe.PivotalRecord.extend({
+  name: DS.attr("string"),
   projectId: DS.attr("number"),
   storyType: DS.attr("string"),
   description: DS.attr("string"),

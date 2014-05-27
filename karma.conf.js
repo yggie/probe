@@ -8,10 +8,8 @@ module.exports = function(config) {
     plugins: [
       'karma-jasmine',
       'karma-phantomjs-launcher',
-      'karma-coffee-preprocessor',
-      'sprockets-chain',
-      'execSync',
-      'fs'
+      'karma-chrome-launcher',
+      'karma-coffee-preprocessor'
     ],
 
 

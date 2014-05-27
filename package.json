@@ -1,0 +1,17 @@
+{
+  "name": "probe",
+  "version": "0.0.0",
+  "description": "An app built using Ember.js and d3.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "karma": "~0.12",
+    "karma-jasmine": "~0.2",
+    "karma-phantomjs-launcher": "~0.1",
+    "karma-chrome-launcher": "~0.1",
+    "karma-coffee-preprocessor": "~0.2",
+    "phantomjs": "~1.9",
+    "sprockets-chain": "~0.0.13",
+    "execSync": "~1.0"
+  }
+}
