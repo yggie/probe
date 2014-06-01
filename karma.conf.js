@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Sun May 25 2014 21:23:07 GMT+0100 (BST)
+"use strict";
 
 module.exports = function(config) {
   config.set({
@@ -57,7 +58,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_DEBUG,
+    logLevel: config.LOG_INFO,
 
 
     // enable / disable watching file and executing tests whenever any file changes
@@ -75,32 +76,9 @@ module.exports = function(config) {
   });
 
   var Chain = require("sprockets-chain"),
-      sh = require("execSync"),
       fs = require("fs");
   var chain = new Chain();
   chain.appendPath("app/assets/javascripts");
   chain.appendPath("vendor/assets/javascripts");
-
-  var output = sh.exec("bundle show --paths");
-  if (output.code === 0) {
-    var dirs = output.stdout.split('\n');
-    dirs.pop();
-
-    var preprocessor = config.preprocessor
-    for (var i = 0; i < dirs.length; i++) {
-      chain.appendPath(dirs[i]);
-      config.preprocessors[dirs[i] + "/**/*.coffee"] = "coffee";
-
-      dir = dirs[i] + "/lib/assets/javascripts";
-      if (fs.existsSync(dir)) {
-        chain.appendPath(dir);
-      }
-
-      dir = dirs[i] + "/vendor/assets/javascripts";
-      if (fs.existsSync(dir)) {
-        chain.appendPath(dir);
-      }
-    }
-  }
   config.files.unshift.apply(config.files, chain.depChain("application.js"));
 };

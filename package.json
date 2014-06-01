@@ -11,7 +11,6 @@
     "karma-chrome-launcher": "~0.1",
     "karma-coffee-preprocessor": "~0.2",
     "phantomjs": "~1.9",
-    "sprockets-chain": "~0.0.13",
-    "execSync": "~1.0"
+    "sprockets-chain": "~0.0.13"
   }
 }
