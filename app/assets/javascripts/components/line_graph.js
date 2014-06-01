@@ -72,11 +72,13 @@ Probe.LineGraphComponent = Ember.Component.extend({
       var height = this.get("height");
       var margin = this.get("margin");
 
-      var b = Probe.Math.covariance(x, y) / Probe.Math.variance(x);
-      var a = Probe.Math.mean(y) - b * Probe.Math.mean(x);
+      var sx = x.slice(Math.max(1, x.length - 5));
+      var sy = y.slice(Math.max(1, y.length - 5));
+      var b = Probe.Math.covariance(sx, sy) / Probe.Math.variance(sx);
+      var a = Probe.Math.mean(sy) - b * Probe.Math.mean(sx);
 
       var xMax = Math.max(d3.max(x), -a/b);
-      var yMax = Math.max(d3.max(y), a);
+      var yMax = d3.max(y);
       var xMap = d3.scale.linear()
         .domain([0, xMax])
         .range([0 + margin, width - margin]);
@@ -99,7 +101,8 @@ Probe.LineGraphComponent = Ember.Component.extend({
         .attr("y2", yMap(0));
 
       graph.select(".end-estimate").attr("transform", "translate(" + xMap(-a/b) + ",-30)");
-      graph.select(".end-estimate-text").text("" + Math.round(-a/b) + " days");
+      graph.select(".end-estimate-text")
+        .text("(" + Math.round(-a/b) + " days)");
 
       // line axes
       graph.select(".x-axis")

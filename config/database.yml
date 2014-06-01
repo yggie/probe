@@ -3,7 +3,11 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
-development: &dev
+development:
+  adapter: sqlite3
+  database: tmp/development.sqlite
+
+temp: &dev
   adapter: postgresql
   encoding: unicode
   database: probe_development

@@ -12,6 +12,7 @@ gem 'pg'
 gem 'ember-rails'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'debugger'
   gem 'better_errors'
   gem 'binding_of_caller'
