@@ -60,6 +60,12 @@ Probe.Project = Probe.PivotalRecord.extend({
     return this.get("stories").filterBy("storyType", "feature");
   }),
 
+  acceptedFeatures: Ember.computed("features.@each", function() {
+    return this.get("features").filter(function(feature) {
+      return !!feature.get("acceptedAt");
+    });
+  }),
+
   estimated: Ember.computed("features.@each", function() {
     var estimated = [];
     this.get("features").forEach(function(feature, i, features) {

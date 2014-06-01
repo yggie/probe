@@ -2,7 +2,7 @@
 <small>{{project.id}}</small>
 
 <h2>Stories for {{project.name}}</h2>
-{{line-graph x-data=project.data.iterationDays y-data=project.data.burndown}}
+{{line-graph x-data=project.data.iterationDays y-data=project.data.burndown start-date=project.data.startDate}}
 {{#if project.stories}}
   <section class="table-responsive">
     <table class="table">

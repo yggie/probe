@@ -54,7 +54,7 @@ Probe.LineGraphComponent = Ember.Component.extend({
     return data;
   },
 
-  updateGraph: Ember.observer("x-data", "y-data", "width", "height", "margin", function() {
+  updateGraph: Ember.observer("x-data", "y-data", "width", "start-date", "height", "margin", function() {
     Ember.run.once(this, function() {
       console.log("updating line graph");
       var x = this.get("x-data");
@@ -72,8 +72,9 @@ Probe.LineGraphComponent = Ember.Component.extend({
       var height = this.get("height");
       var margin = this.get("margin");
 
-      var sx = x.slice(Math.max(1, x.length - 5));
-      var sy = y.slice(Math.max(1, y.length - 5));
+      var numSamplePoints = 5;
+      var sx = x.slice(Math.max(1, x.length - numSamplePoints));
+      var sy = y.slice(Math.max(1, y.length - numSamplePoints));
       var b = Probe.Math.covariance(sx, sy) / Probe.Math.variance(sx);
       var a = Probe.Math.mean(sy) - b * Probe.Math.mean(sx);
 
@@ -100,9 +101,12 @@ Probe.LineGraphComponent = Ember.Component.extend({
         .attr("x2", xMap(-a/b))
         .attr("y2", yMap(0));
 
-      graph.select(".end-estimate").attr("transform", "translate(" + xMap(-a/b) + ",-30)");
+      var endEstimate = Math.ceil(-a/b);
+      var endDate = this.get("start-date");
+      endDate.setDate(endDate.getDate() + endEstimate);
+      graph.select(".end-estimate").attr("transform", "translate(" + (xMap(-a/b) - 30) + ",-30)");
       graph.select(".end-estimate-text")
-        .text("(" + Math.round(-a/b) + " days)");
+        .text(endDate.toDateString() + " (" + endEstimate + " days)");
 
       // line axes
       graph.select(".x-axis")

@@ -1,0 +1,23 @@
+language: ruby
+rvm: "2.1.1"
+
+# to enable javascript testing with X server and firefox
+before_install:
+  - "echo 'gem: --no-document' > ~/.gemrc"
+  - gem install bundler
+  - npm install
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
+before_script:
+  - bundle exec rake db:create:all
+  - bundle exec rake db:migrate
+
+script:
+  - karma start --single-run
+  # - bundle exec rspec --format progress
+  # - xvfb-run bundle exec cucumber --profile ci
+
+notifications:
+  email:
+    - bryan.yap.mh@gmail.com

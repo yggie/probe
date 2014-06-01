@@ -11,13 +11,14 @@
  *   ]
  * }
  */
-//= require ./pivotal_record
 
-Probe.Iteration = Probe.PivotalRecord.extend({
+Probe.Iteration = Ember.Object.extend({
   number: DS.attr("number"),
   projectId: DS.attr("number"),
   teamStrength: DS.attr("number"),
   start: DS.attr("date"),
   finish: DS.attr("date"),
-  stories: DS.hasMany("story", { async: false })
+  kind: DS.attr("string"),
+  createdAt: DS.attr("date"),
+  updatedAt: DS.attr("date")
 });

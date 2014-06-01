@@ -8,14 +8,14 @@ Probe.IterationSerializer = DS.RESTSerializer.extend({
     if (requestType === "find") {
       newPayload.iteration =
         Probe.SerializerHelper.permit(payload, [
-          "kind", "project_id", "team_strength", "start", "finish", "stories",
+          "kind", "project_id", "team_strength", "start", "finish",
           "number"
         ]);
     } else {
       var iterations = [];
       for (var i = 0; i < payload.length; i++) {
         iterations[iterations.length] = Probe.SerializerHelper.permit(payload[i], [
-          "kind", "project_id", "team_strength", "start", "finish", "stories",
+          "kind", "project_id", "team_strength", "start", "finish",
           "number"
         ]);
         // if (stories[stories.length - 1].labels.length == 0) {

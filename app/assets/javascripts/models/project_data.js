@@ -5,10 +5,9 @@ Probe.ProjectData = Ember.Object.extend({
     }, 0);
   }),
 
-  rawIterationDays: Ember.computed("project.features.@each", function() {
-    var rawNormalizedDays = this.get("project.features").map(function(feature) {
+  rawIterationDays: Ember.computed("project.acceptedFeatures.@each", function() {
+    var rawNormalizedDays = this.get("project.acceptedFeatures").map(function(feature) {
       var date = feature.get("acceptedAt");
-      if (!date) return null;
 
       function daysInMonth(month, year) {
         return new Date(year, month, 0).getDate();
@@ -36,11 +35,23 @@ Probe.ProjectData = Ember.Object.extend({
     });
   }),
 
+  startDate: Ember.computed("rawIterationDays.@each", function() {
+    var rawIterationDays = this.get("rawIterationDays");
+    if (rawIterationDays.length < 1) {
+      return null;
+    }
+
+    var min = Math.min.apply(Math, rawIterationDays);
+
+    var accepted = this.get("project.acceptedFeatures");
+    return accepted[rawIterationDays.indexOf(min)].get("acceptedAt");
+  }),
+
   iterationDays: Ember.computed("rawIterationDays.@each", function() {
     var days = this.get("rawIterationDays");
     if (days.length === 0) return [];
 
-    var uniqueDays = [ 0 ];
+    var uniqueDays = [ ];
     days.forEach(function(day, i, days) {
       if (day != null && uniqueDays.indexOf(day) === -1) {
         uniqueDays.push(day);
@@ -60,13 +71,12 @@ Probe.ProjectData = Ember.Object.extend({
 
     var days = this.get("iterationDays");
     var points = [];
-    this.get("project.features").forEach(function(feature, i, features) {
+    this.get("project.acceptedFeatures").forEach(function(feature, i, features) {
       if (rawDays[i] != null) {
         var point = points[days.indexOf(rawDays[i])];
         points[days.indexOf(rawDays[i])] = (point + feature.get("estimate")) || feature.get("estimate");
       }
     });
-    points[days.indexOf(0)] = 0;
     points.forEach(function(point, i, points) {
       if (i > 0) {
         points[i] = points[i - 1] + point;
